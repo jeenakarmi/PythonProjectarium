@@ -1,6 +1,6 @@
-# from tkinter import *
-# root = Tk()
+from tkinter import *
+root = Tk()
 
-# #GUI logic 
-# root.mainloop() #eventloop
-print("hello")
+#GUI logic 
+root.mainloop() #eventloop
+
