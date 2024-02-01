@@ -1,8 +1,10 @@
 from tkinter import *
 
 def get_val():
-    print(user_value.get())
-    print(password_value.get())
+    print(f"{user_value.get() , password_value.get()}")
+
+    with open("records.txt", "a") as f:
+        f.write(f"{user_value.get(), (password_value.get())} \n")
 
 def toggle_password_visibility():
     if show_password.get():
@@ -11,6 +13,23 @@ def toggle_password_visibility():
     else:
         password_entry.config(show="*")
         show_password_label.config(text="😎")
+
+def load_credentials(): # need to modify
+    try:
+        with open("records.txt", "r") as f:
+            lines = f.readlines()
+            if lines:
+                last_line = lines[-1]
+                username, password = last_line.strip().split(', ')
+                user_value.set(username)
+                password_value.set(password)
+                remember_me.set(0)  # Check the "Remember Login" checkbox
+    except FileNotFoundError:
+        # Display an error message if the file is not found
+        print("Error: File 'records.txt' not found.")
+    except Exception as e:
+        # Handle other exceptions and display an error message
+        print(f"An error occurred: {e}")
 
 root = Tk()
 root.geometry("500x335")
@@ -45,6 +64,7 @@ password_entry.grid(row=2, column=2, sticky="nsew")
 
 Button(text="Submit", command=get_val, bg="blue", fg="white").grid(row=6, column=2, sticky="nsew")
 
+load_credentials()
 remember_me = Checkbutton(text="Remember Login", variable=remember_me)
 remember_me.grid(row=4, column=2, sticky="nsew")
 
