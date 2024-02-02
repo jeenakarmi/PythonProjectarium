@@ -1,10 +1,16 @@
 from tkinter import *
 
 def get_val():
-    print(f"{user_value.get() , password_value.get()}")
+    username = user_value.get()
+    password = password_value.get()
+    print(f"{username, password}")
 
     with open("records.txt", "a") as f:
-        f.write(f"{user_value.get(), (password_value.get())} \n")
+        f.write(f"{username}, {password}\n")
+
+    if remember_me_var.get():
+        with open("credentials.txt", "w") as f:
+            f.write(f"{username},{password}")
 
 def toggle_password_visibility():
     if show_password.get():
@@ -14,21 +20,20 @@ def toggle_password_visibility():
         password_entry.config(show="*")
         show_password_label.config(text="😎")
 
-def load_credentials(): # need to modify
+def load_credentials():
     try:
-        with open("records.txt", "r") as f:
-            lines = f.readlines()
-            if lines:
-                last_line = lines[-1]
-                username, password = last_line.strip().split(', ')
+        with open("credentials.txt", "r") as f:
+            content = f.read().strip().split(',')
+            if content:
+                username, password = content
                 user_value.set(username)
                 password_value.set(password)
-                remember_me.set(0)  # Check the "Remember Login" checkbox
+            else:
+                user_value.set('')
+                password_value.set('')
     except FileNotFoundError:
-        # Display an error message if the file is not found
-        print("Error: File 'records.txt' not found.")
+        print("Credentials file not found.")
     except Exception as e:
-        # Handle other exceptions and display an error message
         print(f"An error occurred: {e}")
 
 root = Tk()
@@ -53,6 +58,7 @@ password.grid(row=2, column=1, sticky="nsew")
 user_value = StringVar()
 password_value = StringVar()
 remember_me = IntVar()
+remember_me_var = IntVar()
 show_password = IntVar()
 
 user_entry = Entry(root, textvariable=user_value)
@@ -62,14 +68,15 @@ password_entry = Entry(root, textvariable=password_value, show="*")
 user_entry.grid(row=1, column=2, sticky="nsew")
 password_entry.grid(row=2, column=2, sticky="nsew")
 
-Button(text="Submit", command=get_val, bg="blue", fg="white").grid(row=6, column=2, sticky="nsew")
+Button(text="Log In", command=get_val, bg="blue", fg="white").grid(row=6, column=2, sticky="nsew")
 
-load_credentials()
-remember_me = Checkbutton(text="Remember Login", variable=remember_me)
+remember_me = Checkbutton(text="Remember Login", variable=remember_me_var)
 remember_me.grid(row=4, column=2, sticky="nsew")
+load_credentials()
+
 
 show_password_label = Label(root)
-show_password_label.grid(row=2, column=3, sticky="w", padx=(0, 10))  # Adjust padx to move the emoji closer to the password entry
+show_password_label.grid(row=2, column=3, sticky="w", padx=(0, 10))  
 
 show_password_checkbox = Checkbutton(text="Show  Password", variable=show_password, command=toggle_password_visibility)
 show_password_checkbox.grid(row=5, column=2, sticky="nsew")
