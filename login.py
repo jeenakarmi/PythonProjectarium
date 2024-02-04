@@ -1,16 +1,22 @@
 from tkinter import *
+from tkinter import messagebox
 
 def get_val():
     username = user_value.get()
     password = password_value.get()
     print(f"{username, password}")
 
-    with open("records.txt", "a") as f:
-        f.write(f"{username}, {password}\n")
+    if username and password:
+        with open("records.txt", "a") as f:
+            f.write(f"{username}, {password}\n")
+        if remember_me_var.get():
+            with open("credentials.txt", "w") as f:
+                f.write(f"{username},{password}")
 
-    if remember_me_var.get():
-        with open("credentials.txt", "w") as f:
-            f.write(f"{username},{password}")
+        messagebox.showinfo("Success", "Login successful!")
+
+    else:
+        messagebox.showerror("Error", "Invalid username or password")
 
 def toggle_password_visibility():
     if show_password.get():
@@ -73,7 +79,6 @@ Button(text="Log In", command=get_val, bg="blue", fg="white").grid(row=6, column
 remember_me = Checkbutton(text="Remember Login", variable=remember_me_var)
 remember_me.grid(row=4, column=2, sticky="nsew")
 load_credentials()
-
 
 show_password_label = Label(root)
 show_password_label.grid(row=2, column=3, sticky="w", padx=(0, 10))  
