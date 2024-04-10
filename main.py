@@ -1,8 +1,24 @@
 import tkinter as tk
 
 def click(event):
-    print("hello")
-    pass
+    #gives button that was clicked
+    # cget: extracts text from widget
+    
+    global scvalue
+
+    text = event.widget.cget("text")
+    print(text)
+    if text == "=":
+        pass
+    elif text == "C":
+        pass
+    else:
+        # showing in screen
+        scvalue.set(scvalue.get() + text)
+        screen.update()
+
+
+
 
 root = tk.Tk()
 
