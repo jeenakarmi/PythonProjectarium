@@ -6,5 +6,12 @@ This is a basic calculator application built using Tkinter, a standard GUI (Grap
 
 This calculator application was created to demonstrate how to build a basic GUI calculator using Tkinter in Python. It is intended for educational purposes and as a starting point to learn GUI programming with Python.
 
+## Usage
+- Addition
+- Subtraction
+- Division
+- Multiplication
+- Modulus
+
 
 
