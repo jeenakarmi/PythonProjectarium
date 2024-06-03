@@ -52,11 +52,12 @@ root.geometry(f"{window_width}x{window_height}+{position_right}+{position_top}")
 root.resizable(True, True)
 
 # Style settings
-bg_color = "#ffffff"  # White background
-button_color = "#dcdcdc"  # Grey for operator buttons
+bg_color = "#F0F0F0" 
+button_bg_color = '#ffffff'
+button_color = "#E0E0E0"  # Grey for operator buttons
 button_active_color = "#bdc3c7"
 clear_button_color = "#e74c3c"
-equal_button_color = "#2ecc71"
+equal_button_color = "#4ecc71"
 screen_color = "#34495e"
 button_text_color = "#2c3e50"
 font = "Helvetica 20"
@@ -92,16 +93,16 @@ row_val = 0
 col_val = 0
 
 for text in button_texts:
-    if text in ('/', '*', '-', '+','√'):
+    if text in ('/', '*', '-', '+','√','%'):
         button_bg = button_color
     elif text in ('C', '='):
         button_bg = clear_button_color if text == 'C' else equal_button_color
     else:
-        button_bg = bg_color
+        button_bg = button_bg_color
 
     button = tk.Button(
         frame_buttons, text=text, font=font, bg=button_bg, fg=button_text_color, activebackground=button_active_color,
-        bd=0, highlightthickness=0, relief=tk.RAISED
+        bd=1, highlightthickness=1, relief=tk.RAISED , highlightbackground=button_bg ,borderwidth=0,padx=10, pady=10,
     )
     button.grid(row=row_val, column=col_val, padx=10, pady=10, sticky="nsew")
     button.bind("<Button-1>", click)
