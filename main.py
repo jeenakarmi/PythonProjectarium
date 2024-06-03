@@ -9,13 +9,16 @@ def click(event):
     text = event.widget.cget("text")
     print(text)
     if text == "=":
-        pass
+        try:
+            result = eval(scvalue.get())
+            scvalue.set(result)
+        except Exception as e:
+            scvalue.set("Error")
     elif text == "C":
-        pass
+        scvalue.set("")
     else:
-        # showing in screen
         scvalue.set(scvalue.get() + text)
-        screen.update()
+    screen.update()
 
 root = tk.Tk()
 
@@ -36,22 +39,28 @@ screen = tk.Entry(root, textvar=scvalue, font="lucida 40 bold")
 screen.pack(fill=tk.X, ipadx=8, pady=10, padx=10)
 
 # Create a frame for the digits
-frame_digits = tk.Frame(root, bg="grey")
-frame_digits.pack()
+frame_buttons = tk.Frame(root, bg="grey")
+frame_buttons.pack()
 
-# Define digits 0 to 9
-digits = list(range(10))
+# Define button labels
+button_texts = [
+    '7', '8', '9', '/',
+    '4', '5', '6', '*',
+    '1', '2', '3', '-',
+    'C', '0', '=', '+'
+]
 
-# Create and place the buttons for digits
-for digit in digits:
-    # Calculate row and column for each digit
-    row = 3 - (digit - 1) // 3  # Distribute digits over 3 rows
-    column = (digit - 1) % 3  # Distribute digits over 3 columns
-    if digit == 0:
-        row = 4
-        column = 1
-    button = tk.Button(frame_digits, text=str(digit), font="lucida 35 bold")
-    button.grid(row=row, column=column, padx=5, pady=5)
+# Create and place the buttons in the frame
+row_val = 0
+col_val = 0
+
+for text in button_texts:
+    button = tk.Button(frame_buttons, text=text, font="lucida 20 bold", width=4, height=2)
+    button.grid(row=row_val, column=col_val, padx=5, pady=5)
     button.bind("<Button-1>", click)
+    col_val += 1
+    if col_val > 3:
+        col_val = 0
+        row_val += 1
 
-root.mainloop()  # Event loop
+root.mainloop() # Event loop
