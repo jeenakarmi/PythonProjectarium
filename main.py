@@ -36,6 +36,7 @@ def click(event):
 
 root = tk.Tk()
 root.title("Calculator")
+root.wm_iconbitmap("D:/Codespot/Calculator/1.ico")
 
 # GUI logic 
 
