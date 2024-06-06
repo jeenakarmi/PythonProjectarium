@@ -12,6 +12,8 @@ def click(event):
     if text == "=":
         try:
             result = eval(scvalue.get())
+            if isinstance(result, float):
+                result = f"{result:.5f}".rstrip('0').rstrip('.')
             scvalue.set(result)
         except Exception as e:
             scvalue.set("Error")
@@ -25,6 +27,8 @@ def click(event):
         if current_value and current_value != "Error":
             try:
                 result = math.sqrt(float(current_value))
+                if isinstance(result, float):
+                    result = f"{result:.5f}".rstrip('0').rstrip('.')
                 scvalue.set(result)
             except ValueError:
                 scvalue.set("Error")
