@@ -45,6 +45,12 @@ root.wm_iconbitmap("D:/Codespot/Calculator/Calculator/calculator.ico")
 # GUI logic 
 
 # Width x height
+
+# Set minimum size for the window
+max_width, max_height = 400, 600
+root.maxsize(max_width, max_height)
+root.minsize(max_width,max_height)
+
 # Center the window on the screen
 window_width, window_height = 400, 600
 screen_width = root.winfo_screenwidth()
