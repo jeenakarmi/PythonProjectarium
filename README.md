@@ -12,7 +12,7 @@ This is a basic calculator application built using Tkinter. It provides a user-f
 
 #### Features
 
-- Basic arithmetic operations: addition, subtraction, multiplication, and division.
+- Basic arithmetic operations: addition, subtraction, multiplication, division, square root and modulus.
 - Clear button to reset the input.
 - Intuitive and user-friendly interface.
 
