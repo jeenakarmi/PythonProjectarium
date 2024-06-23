@@ -1,0 +1,4 @@
+# to ensure consistent line endings across all environments.
+
+* text=auto
+*.ipynb text eol=lf
