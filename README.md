@@ -1,6 +1,6 @@
 # Tkinter GUI Applications
 
-This repository contains two separate projects built using Tkinter, a standard GUI (Graphical User Interface) toolkit for Python. The projects included are a basic calculator and a login page.
+This repository contains three separate projects built using Tkinter, a standard GUI (Graphical User Interface) toolkit for Python. The projects included are a basic calculator and a login page.
 
 ## Projects
 
