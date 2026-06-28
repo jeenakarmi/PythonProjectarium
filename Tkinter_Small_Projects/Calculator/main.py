@@ -1,5 +1,6 @@
 import tkinter as tk
-import math 
+import math
+from pathlib import Path
 
 def click(event):
     # Gives button that was clicked
@@ -40,7 +41,9 @@ def click(event):
 
 root = tk.Tk()
 root.title("Calculator")
-root.wm_iconbitmap("D:/Codespot/Calculator/Calculator/calculator.ico")
+icon_path = Path(__file__).with_name("calculator.ico")
+if icon_path.exists():
+    root.wm_iconbitmap(str(icon_path))
 
 # GUI logic 
 
